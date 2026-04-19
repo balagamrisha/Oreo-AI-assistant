@@ -1,97 +1,83 @@
-# Oreo AI — Minimal Conversational AI
+# 🍪 Oreo AI — Minimal Full-Stack Conversational AI
 
-## 📖 Project Overview
+## 📌 Project Overview
 
-Oreo AI is a minimal full-stack conversational AI web application that allows users to enter a single question and receive a single AI-generated response. The response is generated using the **Groq API** (`llama-3.1-8b-instant` model), and every interaction is stored in **MongoDB Atlas**.
+Oreo AI is a minimal full-stack conversational AI web application that allows users to enter a question and receive a single AI-generated response.
 
-The system follows a clean separation of frontend and backend with simple REST architecture.
+The system uses the **Groq API (llama-3.1-8b-instant)** to generate responses and stores every interaction in **MongoDB Atlas**.
 
----
-
-## ⚙️ Tech Stack
-
-### 🖥 Backend
-- Node.js
-- Express.js
-- MongoDB Atlas (Mongoose)
-- Groq API (`llama-3.1-8b-instant`)
-
-### 🌐 Frontend
-- React (Vite)
-- React Router DOM
-- Tailwind CSS
-- Axios
-
----
-
-## 📁 Project Structure
-
-```
-Oreo-AI-assistant/
-│
-├── backend/
-│   └── src/
-│       ├── index.js
-│       ├── models/
-│       │   └── QueryRecord.js
-│       ├── routes/
-│       │   └── query.js
-│       └── services/
-│           └── groq.js
-│
-├── frontend/
-│   └── src/
-│       ├── pages/
-│       │   ├── Landing.jsx
-│       │   └── Chat.jsx
-│       ├── api.js
-│       ├── App.jsx
-│       └── main.jsx
-```
+The project follows a clean full-stack architecture with a React frontend and Node.js backend.
 
 ---
 
 ## 🚀 Features
 
-- Single question → single AI response
-- Groq LLM integration (fast inference)
-- Stores Q&A in MongoDB Atlas
-- Clean UI with Tailwind CSS
-- Routing with React Router (Landing + Chat pages)
-- REST API architecture
+- Accepts a single user question
+- Generates AI response using Groq API
+- Stores question + response in MongoDB
+- Clean, minimal chat UI
+- Markdown-supported AI responses
+- Fully deployed frontend and backend
 
 ---
 
-## 🔌 API Reference
+## 🛠️ Tech Stack
 
-### `POST /api/query`
+### Frontend
+- React (Vite)
+- React Router DOM
+- Axios
+- Tailwind CSS
+- React Markdown
 
-**Request**
-```json
-{
-  "question": "What is artificial intelligence?"
-}
+### Backend
+- Node.js
+- Express.js
+- MongoDB Atlas (Mongoose)
+- Groq API (`llama-3.1-8b-instant`)
+- CORS & dotenv
+
+### Deployment
+- Vercel (Frontend + Backend)
+
+---
+
+## 📂 Project Structure
+
 ```
-
-**Response**
-```json
-{
-  "response": "Artificial intelligence is the simulation of human intelligence in machines..."
-}
+Oreo-AI-assistant/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   │   ├── Landing.jsx
+│   │   │   └── Chat.jsx
+│   │   ├── api.js
+│   │   └── App.jsx
+│
+├── backend/
+│   ├── src/
+│   │   ├── index.js
+│   │   ├── routes/
+│   │   ├── models/
+│   │   └── services/
+│
+├── README.md
+└── vibecoded.md
 ```
 
 ---
 
-## 🛠️ Setup Instructions
+## ⚙️ Setup Instructions
 
-### 1️⃣ Clone Repository
+### 1. Clone Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/your-username/Oreo-AI-assistant.git
 cd Oreo-AI-assistant
 ```
 
-### 2️⃣ Backend Setup
+### 2. Backend Setup
 
 ```bash
 cd backend
@@ -101,17 +87,18 @@ npm install
 Create a `.env` file:
 
 ```env
-MONGO_URI=your_mongodb_atlas_uri
+MONGO_URI=your_mongodb_connection_string
 GROQ_API_KEY=your_groq_api_key
+PORT=5000
 ```
 
 Run backend:
 
 ```bash
-npm run dev
+npm start
 ```
 
-### 3️⃣ Frontend Setup
+### 3. Frontend Setup
 
 ```bash
 cd frontend
@@ -121,36 +108,89 @@ npm run dev
 
 ---
 
-## 🌐 Deployment
+## 🌐 API Usage
 
-### Backend (Vercel)
+### Endpoint
 
-- Import `/backend` folder as a separate project
-- Add environment variables:
-  - `MONGO_URI`
-  - `GROQ_API_KEY`
-- Start command:
-  ```
-  node src/index.js
-  ```
+```
+POST /api/query
+```
 
-### Frontend (Vercel)
+### Request Body
 
-- Import `/frontend` folder as a separate project
-- Build command:
-  ```
-  npm run build
-  ```
-- Output directory:
-  ```
-  dist
-  ```
+```json
+{
+  "question": "What is AI?"
+}
+```
+
+### Response
+
+```json
+{
+  "response": "AI refers to..."
+}
+```
 
 ---
 
-## 🔗 Important Notes
+## 🚀 Deployment Steps
 
-- No chat history (stateless system)
-- Only single question → single response flow
-- Frontend uses React Router pages (Landing & Chat)
-- Backend handles API + DB storage only
+### Backend (Vercel)
+
+1. Import GitHub repository into Vercel
+2. Set Root Directory → `backend`
+3. Add Environment Variables:
+   - `MONGO_URI`
+   - `GROQ_API_KEY`
+4. Deploy
+
+### Frontend (Vercel)
+
+1. Import same repository into Vercel
+2. Set Root Directory → `frontend`
+3. Update API URL in `api.js` to backend Vercel URL
+4. Deploy
+
+---
+
+## 🔐 Environment Variables
+
+### Backend
+
+| Variable | Description |
+|----------|-------------|
+| `MONGO_URI` | MongoDB Atlas connection string |
+| `GROQ_API_KEY` | Groq API key |
+| `PORT` | Server port (default `5000`) |
+
+---
+
+## 📊 Functional Flow
+
+```
+User → Frontend (React)
+     → Backend (Express API)
+     → Groq AI API
+     → MongoDB (store logs)
+     → Response → Frontend → User
+```
+
+---
+
+## ❌ Non-Goals
+
+- No authentication system
+- No chat history
+- No multi-turn conversations
+- No user accounts
+
+---
+
+## 📌 Evaluation Focus
+
+- Clean architecture
+- Correct API integration
+- Successful deployment
+- Proper Git usage
+- Functional UI + backend integration
