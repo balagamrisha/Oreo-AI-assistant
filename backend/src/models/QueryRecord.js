@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const querySchema = new mongoose.Schema(
+const queryRecordSchema = new mongoose.Schema(
   {
     question: {
       type: String,
@@ -15,4 +15,6 @@ const querySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("QueryRecord", querySchema);
+const QueryRecord = mongoose.model("QueryRecord", queryRecordSchema);
+
+export default QueryRecord;
